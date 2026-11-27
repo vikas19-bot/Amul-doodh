@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Amul Milk - Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cw:min(100vw,56.25vh)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;font-family:Inter,system-ui,sans-serif}
+body{display:grid;place-items:center;background:#e2e0e2;transition:background .35s;color:#111}
+body.blue{background:#4b9eff}
+body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.055) 0 1px,transparent 1px calc(var(--cw)*.048)),repeating-linear-gradient(90deg,rgba(0,0,0,.055) 0 1px,transparent 1px calc(var(--cw)*.048))}
+.canvas{position:relative;width:var(--cw);height:100vh}
+.topbar{position:absolute;top:4%;left:5%;right:5%;display:flex;justify-content:space-between;align-items:center;font-size:calc(var(--cw)*.026)}
+.av{display:inline-block;width:calc(var(--cw)*.034);height:calc(var(--cw)*.034);border-radius:50%;background:#111;vertical-align:middle;margin-right:calc(var(--cw)*.018);position:relative;overflow:hidden}
+.av::before{content:"";position:absolute;left:30%;top:18%;width:40%;height:38%;border-radius:50%;background:#fff}.av::after{content:"";position:absolute;left:18%;top:62%;width:64%;height:50%;border-radius:50%;background:#fff}
+.pills{display:flex;gap:calc(var(--cw)*.012)}.pills i{font-style:normal;font-size:calc(var(--cw)*.016);font-weight:600;letter-spacing:.04em;border:1px solid #222;border-radius:99px;padding:calc(var(--cw)*.006) calc(var(--cw)*.02)}
+.ptag{position:absolute;top:19%;left:50%;transform:translateX(-50%);background:#fff;font-weight:600;font-size:calc(var(--cw)*.085);padding:calc(var(--cw)*.018) calc(var(--cw)*.08);border-radius:calc(var(--cw)*.04);box-shadow:0 8px 30px rgba(0,0,0,.08);transition:opacity .3s}
+.ptag.pop{animation:pop .45s cubic-bezier(.3,1.6,.5,1)}@keyframes pop{from{transform:translateX(-50%) scale(.8);filter:blur(6px)}}
+.under{position:absolute;top:70%;left:0;right:0;text-align:center;font-size:calc(var(--cw)*.034);font-weight:500}
+.foot{position:absolute;left:5%;right:5%;bottom:3.4%;display:flex;justify-content:space-between;font-size:calc(var(--cw)*.015);opacity:.75}
+.flash{position:fixed;inset:0;background:#fff;opacity:0;transition:opacity .22s;pointer-events:none;z-index:30}
+.card{container-type:size;position:absolute;left:5%;width:90%;top:31%;aspect-ratio:16/9;overflow:hidden;border-radius:calc(var(--cw)*.035);background:linear-gradient(160deg,#6c6c6c,#cfcfcf 80%);box-shadow:0 calc(var(--cw)*.035) calc(var(--cw)*.09) rgba(10,30,120,.35);transition:filter .25s,transform .25s;color:#fff}
+.card.bl{background:radial-gradient(circle at 50% 62%,#3a74ff,#1d47d8 55%,#13309a 125%)}
+.card.gl{filter:blur(10px) brightness(1.25);transform:scale(1.04)}
+.web .canvas{width:100vw;display:grid;place-items:center}
+.web{background:#13309a!important}.web::before,.web .topbar,.web .ptag,.web .under,.web .foot,.web .flash,.web .wire{display:none}
+.web .card{position:relative;left:auto;top:auto;width:min(100vw,177.78vh);border-radius:0;box-shadow:none}
+.note{display:none;position:absolute;left:0;right:0;bottom:.9cqw;text-align:center;font-size:.8cqw;opacity:.55;z-index:9}.web .note{display:block}
+.wire{position:absolute;inset:0;z-index:12;transition:opacity .3s}
+.wire i{position:absolute;background:rgba(255,255,255,.8);border-radius:99px;animation:sh .8s infinite alternate}.wire i.dk{background:#111}.wire i.c{background:#bdbdbd;border-radius:50%;animation:none}
+@keyframes sh{to{opacity:.45}}
+.loader{position:absolute;left:50%;top:50%;width:6cqw;height:6cqw;margin:-3cqw 0 0 -3cqw;opacity:0;transform:scale(.6);transition:all .5s;z-index:11}
+.ld .loader{opacity:1;transform:scale(1);animation:lp 1.2s ease-in-out infinite}@keyframes lp{50%{transform:scale(1.12)}}
+.dw{position:absolute;left:50%;bottom:0;width:3.4cqw;height:5cqw;margin-left:-1.7cqw;transform-origin:50% 100%}.dw:nth-child(1){transform:rotate(-34deg)}.dw:nth-child(2){transform:rotate(34deg)}
+.dw b{position:absolute;inset:0;background:#fff;border-radius:50% 50% 50% 50%/62% 62% 38% 38%}
+nav{position:absolute;top:2.6cqw;left:5cqw;right:5cqw;display:flex;justify-content:space-between;align-items:center;opacity:0;transition:opacity .7s .5s;z-index:8}
+nav .logo{font-family:'Bagel Fat One',Inter,sans-serif;font-size:3cqw}
+nav .r{display:flex;gap:.7cqw;align-items:center}.shop{background:#fff;color:#1d47d8;font-weight:700;font-size:.85cqw;padding:.5cqw 1.3cqw;border-radius:99px}.ring{width:1.9cqw;height:1.9cqw;border-radius:50%;border:.2cqw solid #fff}
+[data-s="1"] nav,[data-s="2"] nav,[data-s="3"] nav{opacity:1}
+[data-s="1"] .hh{opacity:1}.hh{position:absolute;left:5cqw;top:9.5cqw;z-index:8;opacity:0;transition:opacity .6s .5s}.hh h4{font-size:1.9cqw;line-height:1.1;font-weight:700;letter-spacing:-.02em}.hh p{font-size:.78cqw;line-height:1.5;max-width:16cqw;margin-top:.8cqw;opacity:.8}
+.lt{position:absolute;z-index:1;font-family:'Bagel Fat One',Inter,sans-serif;font-size:12cqw;line-height:1;top:22cqw;display:flex;color:#fff;text-shadow:0 .7cqw 0 rgba(8,32,150,.35)}
+.lt.l{right:58.5cqw}.lt.r{left:59cqw}
+.ltr{display:inline-block;-webkit-text-stroke:.3cqw #fff;opacity:0;transform:translateY(-42cqw) rotate(var(--r));transition:transform .9s cubic-bezier(.3,1.6,.5,1) calc(var(--i)*.09s + .2s),opacity .3s calc(var(--i)*.09s + .2s)}
+[data-s="1"] .ltr{opacity:1;transform:translateY(var(--dy)) rotate(var(--r));animation:wob 3.2s ease-in-out calc(1.6s + var(--i)*-.35s) infinite}
+[data-s="2"] .ltr,[data-s="3"] .ltr{transition:none;opacity:0}
+@keyframes wob{50%{translate:0 -.7cqw;scale:1 1.04}}
+.el{position:absolute;opacity:0;transition:all 1.1s cubic-bezier(.7,0,.2,1)}.el img{width:100%;display:block}
+.pour{z-index:2}.splash{z-index:2;transition-delay:.55s}.bottle{z-index:3;transition-delay:.3s;transform-origin:50% 88%}.splashF{z-index:4;transition-delay:.55s}.splashF img{clip-path:inset(61% 0 0 0)}
+.pour img{clip-path:inset(0 0 100% 0);transition:clip-path 1.3s .9s cubic-bezier(.5,0,.2,1)}[data-s="1"] .pour img{clip-path:inset(0)}
+.bottle img{filter:drop-shadow(0 1.6cqw 1.4cqw rgba(5,20,100,.35));animation:bob 4.5s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-.9cqw)}}
+.chip{position:absolute;z-index:6;font-size:.8cqw;font-weight:600;padding:.45cqw 1.1cqw;border-radius:99px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(4px)}
+.s1only{opacity:0;transform:translateY(1.4cqw);transition:all .7s 1.5s cubic-bezier(.2,.8,.2,1)}[data-s="1"] .s1only{opacity:1;transform:none}
+.price{position:absolute;left:50%;bottom:2.4cqw;transform:translateX(-50%) scale(.6);z-index:7;font-family:'Bagel Fat One',Inter,sans-serif;font-size:4.6cqw;text-shadow:0 .5cqw 1.5cqw rgba(8,32,150,.5);opacity:0;transition:all .7s 1.7s cubic-bezier(.3,1.6,.5,1)}[data-s="1"] .price{opacity:1;transform:translateX(-50%) scale(1)}
+[data-s="2"] .s1only,[data-s="3"] .s1only,[data-s="2"] .price,[data-s="3"] .price{opacity:0;transition:opacity .2s 0s}
+.price small{font-family:Inter,sans-serif;font-size:1.1cqw;font-weight:600;margin-left:.4cqw}
+.bl1{position:absolute;left:5cqw;bottom:3cqw;z-index:7;display:flex;align-items:center;gap:1.2cqw;font-size:.8cqw}.btn{display:inline-block;background:#fff;color:#1d47d8;font-weight:700;font-size:.95cqw;padding:.75cqw 1.8cqw;border-radius:99px}
+.br1{position:absolute;right:5cqw;bottom:3cqw;z-index:7}
+.copy{position:absolute;left:5.5cqw;top:17cqw;max-width:30cqw;opacity:0;transform:translateY(2.5cqw);transition:all .8s .5s cubic-bezier(.2,.8,.2,1);z-index:6}
+[data-s="2"] .c2,[data-s="3"] .c3{opacity:1;transform:none}
+h2{font-family:'Bagel Fat One',Inter,sans-serif;font-weight:400;font-size:4.6cqw;line-height:1.02}.copy p{font-size:1.15cqw;line-height:1.55;max-width:23cqw;margin:1.3cqw 0 1.9cqw;opacity:.92}
+.ribbon{position:absolute;inset:0;width:100%;height:100%;transform:translateX(-110%);pointer-events:none;z-index:10}.ribbon.run{animation:sweep 1.5s cubic-bezier(.6,0,.4,1) forwards}@keyframes sweep{to{transform:translateX(110%)}}
+</style>
+</head>
+<body class="web">
+<div class="canvas">
+  <div class="topbar"><span><span class="av"></span>devbymansi</span><span class="pills"><i>WEBSITE</i><i>CODE</i><i>REELS</i><i>FOLLOW</i></span></div>
+  <div class="ptag" id="tag">Before</div>
+  <div class="card" id="card" data-s="0">
+    <div class="loader"><div class="dw"><b></b></div><div class="dw"><b></b></div></div>
+    <nav><b class="logo">Amul</b><span class="r"><span class="shop">SHOP</span><span class="ring"></span></span></nav>
+    <div class="hh"><h4>Pure Milk.<br>Simply Amul.</h4><p>Fresh, creamy and farm-pure. Chilled and delivered to your door every morning.</p></div>
+    <div class="lt l" id="lt1"></div><div class="lt r" id="lt2"></div>
+    <div class="el pour" id="pour"><img src="img/pour.png" alt=""></div>
+    <div class="el splash" id="splash"><img src="img/splash.png" alt=""></div>
+    <div class="el bottle" id="bottle"><img src="img/bottle.png" alt=""></div>
+    <div class="el splashF" id="splashF"><img src="img/splash.png" alt=""></div>
+    <span class="chip s1only" style="left:6cqw;top:40cqw">Farm fresh</span><span class="chip s1only" style="right:6cqw;top:40cqw">100% pure</span>
+    <div class="price">₹66<small>/ 1 L</small></div>
+    <div class="bl1 s1only"><span class="btn">Shop Now</span>Explore membership</div><div class="br1 s1only"><span class="btn">Taste It</span></div>
+    <div class="copy c2"><h2>Straight from the farm.</h2><p>Every bottle is chilled and sealed within hours of milking, so the taste stays pure.</p><span class="btn">Order now</span></div>
+    <div class="copy c3"><h2>Taste the goodness.</h2><p>Rich, creamy and always fresh. Subscribe once and wake up to Amul every morning.</p><span class="btn">Subscribe</span></div>
+    <svg class="ribbon" id="ribbon" viewBox="0 0 1600 900" preserveAspectRatio="none"><path d="M0 0C220 140-90 300 110 450S10 760 160 900H1440C1290 760 1560 600 1360 450S1480 140 1400 0Z" fill="#fff"/></svg>
+    <div class="note">Concept redesign · not affiliated with Amul</div>
+    <div class="wire" id="wire">
+      <i style="left:4%;top:7%;width:8%;height:6%"></i><i class="dk" style="right:12%;top:6.5%;width:6%;height:3.5%"></i><i style="right:4.5%;top:6.5%;width:3.5%;aspect-ratio:1;border-radius:50%"></i>
+      <i style="left:5%;top:18%;width:30%;height:5%"></i><i style="left:5%;top:26%;width:22%;height:5%"></i><i style="left:5%;top:35%;width:27%;height:1.6%"></i><i style="left:5%;top:39%;width:23%;height:1.6%"></i>
+      <i style="left:7%;right:3%;top:54%;height:17%;border-radius:99px"></i><i class="c" style="left:31%;top:11%;width:40%;aspect-ratio:1"></i>
+      <i class="dk" style="left:5%;top:85%;width:8%;height:2.4%"></i><i style="left:14%;top:86%;width:12%;height:.8%"></i><i style="left:42%;top:90%;width:16%;height:4%"></i><i class="dk" style="right:4%;top:84%;width:10%;height:4.5%"></i>
+    </div>
+  </div>
+  <div class="under"><span class="av"></span>devbymansi</div>
+  <div class="foot"><span>© 2026 All rights reserved</span><span>Concept redesign · not official</span></div>
+</div>
+<div class="flash" id="flash"></div>
+<script>
+const MODE="web";
+const $=id=>document.getElementById(id),card=$("card"),tag=$("tag"),wire=$("wire"),flash=$("flash"),rib=$("ribbon"),body=document.body;
+const word=(el,t,off)=>{$(el).innerHTML=[...t].map((c,i)=>`<span class="ltr" style="--i:${i+off};--r:${[-5,4,-3,6,-4,3,-6,4][(i+off)%8]}deg;--dy:${[0,-.8,.6,-.4][(i+off)%4]}cqw">${c}</span>`).join("")};
+word("lt1","AMUL",0);word("lt2","MILK",4);
+/* [x%, y%, width cqw, rotate deg, scale] */
+const S={
+ 1:{bottle:[50,48.9,14.2,0,1],splash:[48.8,64.9,62,0,1],splashF:[48.8,64.9,62,0,1],pour:[57,23.1,11.3,0,1]},
+ 2:{bottle:[68,49,17,-16,1],splash:[66.6,68.1,70,0,1],splashF:[66.6,68.1,70,0,1],pour:[57,23.1,11.3,0,1]},
+ 3:{bottle:[68,50,16,8,1],splash:[66.6,66.8,64,0,1],splashF:[66.6,66.8,64,0,1],pour:[57,23.1,11.3,0,1]}
+};
+function setState(s){
+  card.dataset.s=s;
+  for(const n of Object.keys(S[1])){
+    const e=$(n),v=S[Math.max(s,1)][n];let y=v[1],sc=v[4];
+    if(s===0){if(n==="bottle")y=v[1]+75;if(n.startsWith("splash"))sc=.2}
+    e.style.left=v[0]+"%";e.style.top=y+"%";e.style.width=v[2]+"cqw";
+    e.style.transform=`translate(-50%,-50%) rotate(${v[3]}deg) scale(${sc})`;
+    e.style.opacity=(s>0&&(n!=="pour"||s===1))?1:0;e.style.transitionTimingFunction=s===1?"cubic-bezier(.3,1.55,.5,1)":"cubic-bezier(.7,0,.2,1)";
+  }
+}
+setState(0);
+function burst(){for(let i=0;i<26;i++){const d=document.createElement("i"),s=.5+Math.random()*1.1,dx=(Math.random()-.5)*46,h=10+Math.random()*16;
+ d.style.cssText=`position:absolute;z-index:5;left:48.8%;top:56%;width:${s}cqw;height:${s}cqw;border-radius:50%;background:#fff;box-shadow:0 .2cqw .5cqw rgba(8,32,150,.35)`;card.appendChild(d);
+ d.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${dx*.6}cqw,${-h}cqw)`,opacity:1,offset:.45,easing:"ease-in"},{transform:`translate(${dx}cqw,${6+Math.random()*8}cqw)`,opacity:0}],{duration:1100+Math.random()*700,delay:Math.random()*250,easing:"ease-out",fill:"forwards"}).onfinish=()=>d.remove()}}
+let T=[],cur=1,iv;const at=(ms,f)=>T.push(setTimeout(f,ms));
+const sweep=(ms,s)=>{at(ms,()=>{rib.classList.remove("run");void rib.getBoundingClientRect();rib.classList.add("run")});at(ms+750,()=>setState(s))};
+function reel(){
+  T.forEach(clearTimeout);T=[];rib.classList.remove("run");
+  body.classList.remove("blue");card.className="card";setState(0);
+  wire.style.opacity=1;tag.style.opacity=1;tag.textContent="Before";flash.style.opacity=0;
+  at(1000,()=>{card.classList.add("gl");flash.style.opacity=1});
+  at(1250,()=>{body.classList.add("blue");wire.style.opacity=0;card.classList.add("bl");tag.textContent="After";tag.classList.remove("pop");void tag.offsetWidth;tag.classList.add("pop")});
+  at(1400,()=>{flash.style.opacity=0;card.classList.remove("gl");card.classList.add("ld")});
+  at(2900,()=>{card.classList.remove("ld");setState(1)});at(3700,burst);
+  at(3400,()=>tag.style.opacity=0);
+  sweep(7400,2);sweep(10800,3);
+}
+function next(){cur=cur%3+1;rib.classList.remove("run");void rib.getBoundingClientRect();rib.classList.add("run");setTimeout(()=>{setState(cur);if(cur===1)setTimeout(burst,800)},750)}
+function web(){card.classList.add("bl");clearInterval(iv);cur=1;setState(0);setTimeout(()=>{setState(1);setTimeout(burst,800);iv=setInterval(next,5200)},300)}
+if(MODE==="reel"){addEventListener("click",reel);addEventListener("keydown",e=>{if(e.key==="r"||e.key===" ")reel()});document.fonts.ready.then(()=>setTimeout(reel,500))}
+else{addEventListener("click",()=>{clearInterval(iv);next();iv=setInterval(next,5200)});document.fonts.ready.then(web)}
+</script>
+</body>
+</html>
